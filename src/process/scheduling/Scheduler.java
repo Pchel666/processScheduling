@@ -79,15 +79,25 @@ public class Scheduler
 	//TODO:choose algorithm, make method for each algorithm, make the chart
 	}
 	
-	private int[] FCFS()
+	private double[] FCFS(Process[] process, int length)
 	{
 		//first come first serve - non-preemptive
-		int[] results;
+		double[] results = {};
+		double wt= 0;
+		double tat= 0;
 		
-		for(int i= 0; i<; i++)
-		{
+		for(int i= 0; i< length; i++)
+		{	
+			if(i>0)
+			{
+				wt+= tat;
+			}
 			
+			tat+= process[i].getBursttime();
 		}
+		
+		results[0]= wt/length;
+		results[1]= tat/length;
 		
 		return results;
 	}
