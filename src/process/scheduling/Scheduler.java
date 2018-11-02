@@ -96,7 +96,10 @@ public class Scheduler
 			tat+= process[i].getBursttime();
 		}
 		
+		//wait time average
 		results[0]= wt/length;
+		
+		//turn around time average
 		results[1]= tat/length;
 		
 		return results;
