@@ -9,12 +9,19 @@ public class Process
 	
 	public Process()
 	{
-		
 	}
 	
-	public void setPid(int p)
+	public Process(int pi, int b, int a, int p)
 	{
-		pid = p;
+		pid = pi;
+		bursttime = b;
+		arrivaltime = a;
+		priority = p;
+	}
+	
+	public void setPid(int pi)
+	{
+		pid = pi;
 	}
 	
 	public int getPid()
@@ -30,5 +37,25 @@ public class Process
 	public int getBursttime()
 	{
 		return bursttime;
+	}
+	
+	public void setArrivaltime(int a)
+	{
+		arrivaltime = a;
+	}
+	
+	public int getArrivaltime()
+	{
+		return arrivaltime;
+	}
+	
+	public void setPriority(int p)
+	{
+		priority = p;
+	}
+	
+	public int getPriority()
+	{
+		return priority;
 	}
 }
