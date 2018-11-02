@@ -1,5 +1,6 @@
 package process.scheduling;
 
-public class Scheduler {
+public class Scheduler 
+{
 
 }
