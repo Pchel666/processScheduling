@@ -32,6 +32,7 @@ public class Scheduler
 			}
 		}
 		counter=0;
+		//checking if priority values will be given
 		while(counter==0)
 		{
 			System.out.println("Are there priority values?(1 for yes, 0 for no)");
@@ -48,6 +49,7 @@ public class Scheduler
 			}
 		}
 		counter=0;
+		//getting all process information
 		for (int i=0;i<processes.length;i++)
 		{
 			processes[i] = new Process();
@@ -68,5 +70,7 @@ public class Scheduler
 				processes[i].setPriority(holder);
 			}
 		}
+		//choosing algorithm
+		//TODO:choose algorithm, make method for each algorithm, make the chart
 	}
 }
