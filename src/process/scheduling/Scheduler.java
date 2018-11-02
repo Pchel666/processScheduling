@@ -73,27 +73,27 @@ public class Scheduler
 		//choosing algorithm
 		//TODO:choose algorithm, make method for each algorithm, make the chart
 	}
-	private int FCFS()
+	private int[] FCFS()
 	{
 		//first come first serve - non-preemptive
 	}
-	private int SJF()
+	private int[] SJF()
 	{
 		//short job first - non-preemptive
 	}
-	private int SRT()
+	private int[] SRT()
 	{
 		//shortest remaining time - preemptive
 	}
-	private int Priority()
+	private int[] Priority()
 	{
 		//priority - preemptive
 	}
-	private int RR()
+	private int[] RRf()
 	{
-		//round robin
+		//round robin (fixed)
 	}
-	private int RRv()
+	private int[] RRv()
 	{
 		//round robin (variable)
 	}
