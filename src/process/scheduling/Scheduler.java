@@ -82,6 +82,14 @@ public class Scheduler
 	private int[] FCFS()
 	{
 		//first come first serve - non-preemptive
+		int[] results;
+		
+		for(int i= 0; i<; i++)
+		{
+			
+		}
+		
+		return results;
 	}
 	
 	private int[] SJF()
