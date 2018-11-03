@@ -105,27 +105,27 @@ public class Scheduler
 		return results;
 	}
 	
-	private int[] SJF()
+	private double[] SJF()
 	{
 		//short job first - non-preemptive
 	}
 	
-	private int[] SRT()
+	private double[] SRT()
 	{
 		//shortest remaining time - preemptive
 	}
 	
-	private int[] Priority()
+	private double[] Priority()
 	{
 		//priority - preemptive
 	}
 	
-	private int[] RRf()
+	private double[] RRf()
 	{
 		//round robin (fixed)
 	}
 	
-	private int[] RRv()
+	private double[] RRv()
 	{
 		//round robin (variable)
 	}
