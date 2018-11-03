@@ -109,7 +109,16 @@ public class Scheduler
 	{
 		//short job first - non-preemptive
 		double[] results = {0,0};
-		
+		double wt= 0;
+		double tat= 0;
+		int counter = 0;
+		for(int i=0;i<process.length;i++)
+		{
+			if (process[i].getArrivaltime()>0)
+			{
+				counter=1;
+			}
+		}		
 		return results;
 	}
 	

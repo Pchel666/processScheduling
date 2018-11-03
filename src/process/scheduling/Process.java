@@ -8,6 +8,9 @@ public class Process
 	
 	public Process()
 	{
+		bursttime = 0;
+		arrivaltime = 0;
+		priority = 0;
 	}
 	
 	public Process(int b, int a, int p)
