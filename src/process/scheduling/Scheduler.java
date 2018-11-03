@@ -108,17 +108,19 @@ public class Scheduler
 	private double[] SJF(Process[] process)
 	{
 		//short job first - non-preemptive
+		Process[] reorgProcess = new Process[process.length];		
 		double[] results = {0,0};
-		double wt= 0;
-		double tat= 0;
+		double[] wt= new double[process.length];
+		double[] tat= new double[process.length];
 		int counter = 0;
 		for(int i=0;i<process.length;i++)
 		{
-			if (process[i].getArrivaltime()>0)
+			if (process[i].getArrivaltime()==0)
 			{
-				counter=1;
+				reorgProcess[counter]=process[i];
+				counter++;
 			}
-		}		
+		}
 		return results;
 	}
 	
