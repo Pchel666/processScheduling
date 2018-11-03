@@ -113,13 +113,18 @@ public class Scheduler
 		double[] wt= new double[process.length];
 		double[] tat= new double[process.length];
 		int counter = 0;
-		for(int i=0;i<process.length;i++)
+		int scounter = 0;
+		while (counter<process.length)
 		{
-			if (process[i].getArrivaltime()==0)
+			for(int i=0;i<process.length;i++)
 			{
-				reorgProcess[counter]=process[i];
-				counter++;
+				if (process[i].getArrivaltime()==scounter)
+				{
+					reorgProcess[counter]=process[i];
+					counter++;
+				}
 			}
+			scounter++;
 		}
 		return results;
 	}
