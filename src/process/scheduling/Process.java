@@ -2,31 +2,19 @@ package process.scheduling;
 
 public class Process
 {
-	public int pid;
-	public int bursttime;
-	public int arrivaltime;
-	public int priority;
+	private int bursttime;
+	private int arrivaltime;
+	private int priority;
 	
 	public Process()
 	{
 	}
 	
-	public Process(int pi, int b, int a, int p)
+	public Process(int b, int a, int p)
 	{
-		pid = pi;
 		bursttime = b;
 		arrivaltime = a;
 		priority = p;
-	}
-	
-	public void setPid(int pi)
-	{
-		pid = pi;
-	}
-	
-	public int getPid()
-	{
-		return pid;
 	}
 	
 	public void setBursttime(int b)

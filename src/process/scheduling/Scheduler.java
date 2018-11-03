@@ -105,28 +105,43 @@ public class Scheduler
 		return results;
 	}
 	
-	private double[] SJF()
+	private double[] SJF(Process[] process)
 	{
 		//short job first - non-preemptive
+		double[] results = {0,0};
+		
+		return results;
 	}
 	
-	private double[] SRT()
+	private double[] SRT(Process[] process)
 	{
 		//shortest remaining time - preemptive
+		double[] results = {0,0};
+		
+		return results;
 	}
 	
-	private double[] Priority()
+	private double[] Priority(Process[] process)
 	{
 		//priority - preemptive
+		double[] results = {0,0};
+		
+		return results;
 	}
 	
-	private double[] RRf()
+	private double[] RRf(Process[] process)
 	{
 		//round robin (fixed)
+		double[] results = {0,0};
+		
+		return results;
 	}
 	
-	private double[] RRv()
+	private double[] RRv(Process[] process)
 	{
 		//round robin (variable)
+		double[] results = {0,0};
+		
+		return results;
 	}
 }
