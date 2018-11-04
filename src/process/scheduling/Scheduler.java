@@ -148,6 +148,7 @@ public class Scheduler
 				results[0]+=results[1]-reorgProcess[i].getBursttime();
 			}
 		}
+		
 		//wait time average
 		results[0]= results[0]/process.length;
 		//turn around time average
