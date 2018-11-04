@@ -85,29 +85,29 @@ public class Scheduler
 			System.out.println("What algorithm to use?(FCFS, SJF, SRT, Priority, RRf, RRv)");
 			alg = reader.nextLine();
 		}
-		double[] output;
+		double[] output= {0,0};
 		switch(alg)
 		{
 			case "FCFS":
-				//FCFS
+				output = FCFS(processes);
 				break;
 			case "SJF":
 				output = SJF(processes);
-				System.out.println("Average wait time: " + output[0] + " Average turnaround time: " + output[1]);
 				break;
 			case "SRT":
-				//SRT
+				output = SRT(processes);
 				break;
 			case "Priority":
-				//Priority
+				output = Priority(processes);
 				break;
 			case "RRf":
-				//RRf
+				output = RRf(processes);
 				break;
 			case "RRv":
-				//RRv
+				output = RRv(processes);
 				break;
 		}
+		System.out.println("Average wait time: " + output[0] + " Average turnaround time: " + output[1]);
 	}
 	
 	private static double[] FCFS(Process[] process)
