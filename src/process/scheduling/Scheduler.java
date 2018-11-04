@@ -58,7 +58,7 @@ public class Scheduler
 		for (int i=0;i<processes.length;i++)
 		{
 			processes[i] = new Process();
-			System.out.println("Inputting values for process " + i);
+			System.out.println("Inputting values for process " + i+1);
 			System.out.println("What is the burst time?");
 			holder = reader.nextInt();
 			processes[i].setBursttime(holder);
@@ -82,13 +82,15 @@ public class Scheduler
 			System.out.println("What algorithm to use?(FCFS, SJF, SRT, Priority, RRf, RRv)");
 			alg = reader.nextLine();
 		}
+		double[] output;
 		switch(alg)
 		{
 			case "FCFS":
 				//FCFS
 				break;
 			case "SJF":
-				SJF(processes);
+				output = SJF(processes);
+				System.out.println("Average wait time: " + output[0] + " Average turnaround time: " + output[1]);
 				break;
 			case "SRT":
 				//SRT
@@ -271,7 +273,7 @@ public class Scheduler
 		//scenario where arrival times are different
 		else
 		{
-			while()
+			//while()
 			for(int i= 0; i< process.length; i++)
 			{	
 				wt+= tat;
