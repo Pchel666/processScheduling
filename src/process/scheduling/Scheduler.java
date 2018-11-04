@@ -222,8 +222,15 @@ public class Scheduler
 	private static double[] SRT(Process[] process)
 	{
 		//shortest remaining time - preemptive
+		Process[] reorgProcess = new Process[process.length];
+		
 		double[] results = {0,0}; //{wait time, turnaround time}
 		
+		//wait time average
+		results[0]= results[0]/process.length;
+				
+		//turn around time average
+		results[1]= results[1]/process.length;
 		return results;
 	}
 	
@@ -233,8 +240,6 @@ public class Scheduler
 		Process[] reorgProcess = new Process[process.length];
 		
 		double[] results = {0,0};
-		double wt= 0;
-		double tat= 0;
 		
 		int counter = 0;
 		//arrival time searched
@@ -275,8 +280,8 @@ public class Scheduler
 	
 			for(int i= 0; i< process.length; i++)
 			{	
-				wt+= tat;
-				tat+= process[i].getBursttime();
+				results[0]+= results[1];
+				results[1]+= reorgProcess[i].getBursttime();
 			}
 		}
 		//scenario where arrival times are different
@@ -285,26 +290,30 @@ public class Scheduler
 			//while()
 			for(int i= 0; i< process.length; i++)
 			{	
-				wt+= tat;
-				
-				tat+= process[i].getBursttime();
+				results[0]+= results[1];
+				results[1]+= reorgProcess[i].getBursttime();
 			}
 		}
 		
 		//wait time average
-		results[0]= wt/process.length;
-		
+		results[0]= results[0]/process.length;
 		//turn around time average
-		results[1]= tat/process.length;
+		results[1]= results[1]/process.length;
 
-		
 		return results;
 	}
 	
 	private static double[] RRf(Process[] process)
 	{
 		//round robin (fixed)
+		Process[] reorgProcess = new Process[process.length];
+		
 		double[] results = {0,0}; //{wait time, turnaround time}
+		
+		//wait time average
+		results[0]= results[0]/process.length;		
+		//turn around time average
+		results[1]= results[1]/process.length;
 		
 		return results;
 	}
@@ -312,7 +321,14 @@ public class Scheduler
 	private static double[] RRv(Process[] process)
 	{
 		//round robin (variable)
+		Process[] reorgProcess = new Process[process.length];
+		
 		double[] results = {0,0}; //{wait time, turnaround time}
+		
+		//wait time average
+		results[0]= results[0]/process.length;		
+		//turn around time average
+		results[1]= results[1]/process.length;
 		
 		return results;
 	}
