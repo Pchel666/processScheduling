@@ -146,7 +146,6 @@ public class Scheduler
 				ct=ct+reorgProcess[i].getBursttime();
 				results[1]+=ct-reorgProcess[i].getArrivaltime();
 				results[0]+=results[1]-reorgProcess[i].getBursttime();
-				
 			}
 		}
 		//wait time average
