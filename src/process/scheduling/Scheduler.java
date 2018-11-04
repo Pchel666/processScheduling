@@ -139,21 +139,25 @@ public class Scheduler
 			{
 				ct=reorgProcess[i].getArrivaltime()+reorgProcess[i].getBursttime();
 				reorgProcess[i].setTurnaroundtime(ct-reorgProcess[i].getArrivaltime());
-				reorgProcess[i].setWaittime(reorgProcess[i].getTurnaroundtime()-reorgProcess[i].getArrivaltime());
+				reorgProcess[i].setWaittime(reorgProcess[i].getTurnaroundtime()-reorgProcess[i].getBursttime());
 			}
 			else
 			{
 				ct=ct+reorgProcess[i].getBursttime();
-				results[1]+=ct-reorgProcess[i].getArrivaltime();
-				results[0]+=results[1]-reorgProcess[i].getBursttime();
+				reorgProcess[i].setTurnaroundtime(ct-reorgProcess[i].getArrivaltime());
+				reorgProcess[i].setWaittime(reorgProcess[i].getTurnaroundtime()-reorgProcess[i].getBursttime());
 			}
+		}
+		for(int i=0;i<reorgProcess.length;i++)
+		{
+			results[0]+=reorgProcess[i].getWaittime();
+			results[0]+=reorgProcess[i].getTurnaroundtime();
 		}
 		
 		//wait time average
 		results[0]= results[0]/process.length;
 		//turn around time average
 		results[1]= results[1]/process.length;
-		
 		return results;
 	}
 	
@@ -205,18 +209,26 @@ public class Scheduler
 			if(ct<=reorgProcess[i].getArrivaltime())
 			{
 				ct=reorgProcess[i].getArrivaltime()+reorgProcess[i].getBursttime();
-				results[1]+=ct-reorgProcess[i].getArrivaltime();
-				results[0]+=results[1]-reorgProcess[i].getBursttime();
+				reorgProcess[i].setTurnaroundtime(ct-reorgProcess[i].getArrivaltime());
+				reorgProcess[i].setWaittime(reorgProcess[i].getTurnaroundtime()-reorgProcess[i].getBursttime());
 			}
 			else
 			{
 				ct=ct+reorgProcess[i].getBursttime();
-				results[1]+=ct-reorgProcess[i].getArrivaltime();
-				results[0]+=results[1]-reorgProcess[i].getBursttime();
+				reorgProcess[i].setTurnaroundtime(ct-reorgProcess[i].getArrivaltime());
+				reorgProcess[i].setWaittime(reorgProcess[i].getTurnaroundtime()-reorgProcess[i].getBursttime());
 			}
 		}
-		results[0]=results[0]/reorgProcess.length;
-		results[1]=results[1]/reorgProcess.length;
+		for(int i=0;i<reorgProcess.length;i++)
+		{
+			results[0]+=reorgProcess[i].getWaittime();
+			results[0]+=reorgProcess[i].getTurnaroundtime();
+		}
+		
+		//wait time average
+		results[0]= results[0]/process.length;
+		//turn around time average
+		results[1]= results[1]/process.length;
 		return results;
 	}
 	
