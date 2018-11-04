@@ -120,7 +120,6 @@ public class Scheduler
 		int counter = 0;
 		//arrival time searched
 		int scounter = 0;
-		
 		while (counter<process.length)
 		{
 			for(int i=0;i<process.length;i++)
