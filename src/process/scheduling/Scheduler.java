@@ -224,7 +224,6 @@ public class Scheduler
 			results[0]+=reorgProcess[i].getWaittime();
 			results[1]+=reorgProcess[i].getTurnaroundtime();
 		}
-		
 		//wait time average
 		results[0]= results[0]/process.length;
 		//turn around time average
