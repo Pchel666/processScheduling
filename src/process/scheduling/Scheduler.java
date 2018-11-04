@@ -330,6 +330,7 @@ public class Scheduler
 		results[0]= results[0]/process.length;		
 		//turn around time average
 		results[1]= results[1]/process.length;
+		
 		return results;
 	}
 }
