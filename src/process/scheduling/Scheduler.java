@@ -107,7 +107,7 @@ public class Scheduler
 		}
 	}
 	
-	private double[] FCFS(Process[] process)
+	private static double[] FCFS(Process[] process)
 	{
 		//first come first serve - non-preemptive
 		Process[] reorgProcess = new Process[process.length];
@@ -218,7 +218,7 @@ public class Scheduler
 		return results;
 	}
 	
-	private double[] Priority(Process[] process)
+	private static double[] Priority(Process[] process)
 	{
 		//priority - preemptive
 		Process[] reorgProcess = new Process[process.length];
