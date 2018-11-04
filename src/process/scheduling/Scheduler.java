@@ -151,7 +151,7 @@ public class Scheduler
 		for(int i=0;i<reorgProcess.length;i++)
 		{
 			results[0]+=reorgProcess[i].getWaittime();
-			results[0]+=reorgProcess[i].getTurnaroundtime();
+			results[1]+=reorgProcess[i].getTurnaroundtime();
 		}
 		
 		//wait time average
@@ -222,7 +222,7 @@ public class Scheduler
 		for(int i=0;i<reorgProcess.length;i++)
 		{
 			results[0]+=reorgProcess[i].getWaittime();
-			results[0]+=reorgProcess[i].getTurnaroundtime();
+			results[1]+=reorgProcess[i].getTurnaroundtime();
 		}
 		
 		//wait time average
