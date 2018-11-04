@@ -138,8 +138,8 @@ public class Scheduler
 			if(ct<=reorgProcess[i].getArrivaltime())
 			{
 				ct=reorgProcess[i].getArrivaltime()+reorgProcess[i].getBursttime();
-				results[1]+=ct-reorgProcess[i].getArrivaltime();
-				results[0]+=results[1]-reorgProcess[i].getBursttime();
+				reorgProcess[i].setTurnaroundtime(ct-reorgProcess[i].getArrivaltime());
+				reorgProcess[i].setWaittime(reorgProcess[i].getTurnaroundtime()-reorgProcess[i].getArrivaltime());
 			}
 			else
 			{

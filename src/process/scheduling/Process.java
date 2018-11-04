@@ -56,7 +56,7 @@ public class Process
 		return priority;
 	}
 	
-	public void setWaittime(int w)
+	public void setWaittime(double w)
 	{
 		waittime = w;
 	}
@@ -66,7 +66,7 @@ public class Process
 		return waittime;
 	}
 	
-	public void setTurnaroundtime(int t)
+	public void setTurnaroundtime(double t)
 	{
 		turnaroundtime = t;
 	}
