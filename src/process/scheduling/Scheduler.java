@@ -105,28 +105,42 @@ public class Scheduler
 		}
 	}
 	
-	private static double[] FCFS(Process[] process, int length)
+	private double[] FCFS(Process[] process)
 	{
 		//first come first serve - non-preemptive
-		double[] results = {}; //{wait time, turnaround time}
+		Process[] reorgProcess = new Process[process.length];
+		
+		double[] results = {0,0};
 		double wt= 0;
 		double tat= 0;
 		
-		for(int i= 0; i< length; i++)
-		{	
-			if(i>0)
+		int counter = 0;
+		//arrival time searched
+		int scounter = 0;
+		
+		while (counter<process.length)
+		{
+			for(int i=0;i<process.length;i++)
 			{
-				wt+= tat;
+				if (process[i].getArrivaltime()==scounter)
+				{
+					reorgProcess[counter]=process[i];
+					counter++;
+				}
 			}
-			
+			scounter++;
+		}
+		
+		for(int i= 0; i< process.length; i++)
+		{	
+			wt+= tat;
 			tat+= process[i].getBursttime();
 		}
 		
 		//wait time average
-		results[0]= wt/length;
-		
+		results[0]= wt/process.length;
 		//turn around time average
-		results[1]= tat/length;
+		results[1]= tat/process.length;
 		
 		return results;
 	}
@@ -202,10 +216,76 @@ public class Scheduler
 		return results;
 	}
 	
-	private static double[] Priority(Process[] process)
+	private double[] Priority(Process[] process)
 	{
 		//priority - preemptive
-		double[] results = {0,0}; //{wait time, turnaround time}
+		Process[] reorgProcess = new Process[process.length];
+		
+		double[] results = {0,0};
+		double wt= 0;
+		double tat= 0;
+		
+		int counter = 0;
+		//arrival time searched
+		int scounter = 0;
+		
+		while (counter<process.length)
+		{
+			for(int i=0;i<process.length;i++)
+			{
+				if (process[i].getArrivaltime()==scounter)
+				{
+					reorgProcess[counter]=process[i];
+					counter++;
+				}
+			}
+			scounter++;
+		}
+		
+		//scenario where arrival time is the same, so processes get sorted by priority
+		if(scounter == 0)
+		{
+			int count = 0;
+			//arrival time searched
+			int scount = 0;
+			
+			while (count<process.length)
+			{
+				for(int i=0;i<process.length;i++)
+				{
+					if (process[i].getPriority()==scount)
+					{
+						reorgProcess[count]=process[i];
+						count++;
+					}
+				}
+				scount++;
+			}
+	
+			for(int i= 0; i< process.length; i++)
+			{	
+				wt+= tat;
+				tat+= process[i].getBursttime();
+			}
+		}
+		//scenario where arrival times are different
+		else
+		{
+			while()
+			for(int i= 0; i< process.length; i++)
+			{	
+				wt+= tat;
+				
+				tat+= process[i].getBursttime();
+			}
+		}
+		
+		//wait time average
+		results[0]= wt/process.length;
+		
+		//turn around time average
+		results[1]= tat/process.length;
+
 		
 		return results;
 	}
