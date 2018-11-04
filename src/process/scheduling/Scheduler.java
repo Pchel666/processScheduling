@@ -55,10 +55,12 @@ public class Scheduler
 		counter=0;
 		
 		//getting all process information
+		int pidcounter = 1;
 		for (int i=0;i<processes.length;i++)
 		{
 			processes[i] = new Process();
-			System.out.println("Inputting values for process " + i+1);
+			System.out.println("Inputting values for process " + pidcounter);
+			pidcounter++;
 			System.out.println("What is the burst time?");
 			holder = reader.nextInt();
 			processes[i].setBursttime(holder);
@@ -77,6 +79,7 @@ public class Scheduler
 		}
 		//choosing algorithm
 		String alg = "";
+		reader.nextLine();
 		while(!alg.equals("FCFS")&&!alg.equals("SJF")&&!alg.equals("SRT")&&!alg.equals("Priority")&&!alg.equals("RRf")&&!alg.equals("RRv"))
 		{
 			System.out.println("What algorithm to use?(FCFS, SJF, SRT, Priority, RRf, RRv)");
