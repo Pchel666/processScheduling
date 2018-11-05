@@ -409,9 +409,22 @@ public class Scheduler
 	private static double[] RRf(Process[] process)
 	{
 		//round robin (fixed)
-		Process[] reorgProcess = new Process[process.length];
-		
+		ArrayList<Process> currentlyProcessed = new ArrayList<Process>(0);
 		double[] results = {0,0}; //{wait time, turnaround time}
+		int currentTime = 0;
+		boolean alldone = false;
+		while(!alldone)
+		{
+			for(int i=0;i<process.length;i++)
+			{
+				if (process[i].getArrivaltime()==currentTime)
+				{
+					currentlyProcessed.add(process[i]);
+				}
+			}
+			currentTime++;
+			alldone = true;
+		}
 		
 		//wait time average
 		results[0]= results[0]/process.length;		
