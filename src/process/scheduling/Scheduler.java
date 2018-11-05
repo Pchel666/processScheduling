@@ -252,6 +252,24 @@ public class Scheduler
 		return results;
 	}
 	
+	private static void FCFSGnatt(Process[] process)
+	{
+		FCFS(process);
+		
+		double times[]= new double[process.length];
+		
+		for(int i=0; i<process.length; i++)
+		{
+			times[i]= process[i].getWaittime();
+		}
+		
+		for(int j=0; j<times.length;j++)
+		{
+			for(int k= 0; )
+		}
+
+	}
+	
 	private static double[] SJF(Process[] process)
 	{
 		//short job first - non-preemptive
