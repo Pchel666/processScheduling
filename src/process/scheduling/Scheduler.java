@@ -149,10 +149,14 @@ public class Scheduler
 					output = Priority(processes);
 					break;
 				case "RRf":
-					output = RRf(processes);
+					System.out.println("What is the quantum?");
+					holder = reader.nextInt();
+					output = RRf(processes, holder);
 					break;
 				case "RRv":
-					output = RRv(processes);
+					System.out.println("What is the quantum?");
+					holder = reader.nextInt();
+					output = RRv(processes, holder);
 					break;
 			}
 			
@@ -406,7 +410,7 @@ public class Scheduler
 		return results;
 	}
 	
-	private static double[] RRf(Process[] process)
+	private static double[] RRf(Process[] process, int quantum)
 	{
 		//round robin (fixed)
 		ArrayList<Process> currentlyProcessed = new ArrayList<Process>(0);
@@ -434,7 +438,7 @@ public class Scheduler
 		return results;
 	}
 	
-	private static double[] RRv(Process[] process)
+	private static double[] RRv(Process[] process, int quantum)
 	{
 		//round robin (variable)
 		Process[] reorgProcess = new Process[process.length];

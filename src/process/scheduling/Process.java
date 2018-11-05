@@ -5,8 +5,8 @@ public class Process
 	private int bursttime;
 	private int arrivaltime;
 	private int priority;
-	private double waittime;
-	private double turnaroundtime;
+	private int waittime;
+	private int turnaroundtime;
 	
 	public Process()
 	{
@@ -17,7 +17,7 @@ public class Process
 		turnaroundtime = 0;
 	}
 	
-	public Process(int b, int a, int p, double w, double t)
+	public Process(int b, int a, int p, int w, int t)
 	{
 		bursttime = b;
 		arrivaltime = a;
@@ -56,22 +56,22 @@ public class Process
 		return priority;
 	}
 	
-	public void setWaittime(double w)
+	public void setWaittime(int w)
 	{
 		waittime = w;
 	}
 	
-	public double getWaittime()
+	public int getWaittime()
 	{
 		return waittime;
 	}
 	
-	public void setTurnaroundtime(double t)
+	public void setTurnaroundtime(int t)
 	{
 		turnaroundtime = t;
 	}
 	
-	public double getTurnaroundtime()
+	public int getTurnaroundtime()
 	{
 		return turnaroundtime;
 	}
