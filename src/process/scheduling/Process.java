@@ -7,6 +7,7 @@ public class Process
 	private int priority;
 	private int waittime;
 	private int turnaroundtime;
+	private int remainingtime;
 	
 	public Process()
 	{
@@ -15,6 +16,7 @@ public class Process
 		priority = 0;
 		waittime = 0;
 		turnaroundtime = 0;
+		remainingtime = 0;
 	}
 	
 	public Process(int b, int a, int p, int w, int t)
@@ -24,6 +26,7 @@ public class Process
 		priority = p;
 		waittime = w;
 		turnaroundtime = t;
+		remainingtime = bursttime;
 	}
 	
 	public void setBursttime(int b)
@@ -74,5 +77,15 @@ public class Process
 	public int getTurnaroundtime()
 	{
 		return turnaroundtime;
+	}
+	
+	public void subtractRemainingtime(int r)
+	{
+		remainingtime -= r;
+	}
+	
+	public int getRemainingtime()
+	{
+		return remainingtime;
 	}
 }
