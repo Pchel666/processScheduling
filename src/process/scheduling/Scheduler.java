@@ -1,6 +1,7 @@
 package process.scheduling;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Scheduler 
@@ -12,6 +13,7 @@ public class Scheduler
 		boolean arrtimes = false;
 		boolean priorities = false;
 		
+		System.out.println("////////////////////////////////////////////////////////////////////////////////////////\nLab 4- Operating Systems CPU Scheduling Algorithms\n\nAlexander Popov & Steven Perez\n////////////////////////////////////////////////////////////////////////////////////////\n");
 		//setting array of processes
 		Scanner reader = new Scanner(System.in);
 		System.out.println("How many processes?");
@@ -53,7 +55,7 @@ public class Scheduler
 			}
 		}
 		counter=0;
-		
+		System.out.println("\n");
 		//getting all process information
 		int pidcounter = 1;
 		for (int i=0;i<processes.length;i++)
@@ -76,10 +78,15 @@ public class Scheduler
 				holder = reader.nextInt();
 				processes[i].setPriority(holder);
 			}
+			System.out.println("*****************************************");
 		}
 		//choosing algorithm
+
 		String alg = "";
 		reader.nextLine();
+/*
+ * PREVIOUS 
+ * 
 		while(!alg.equals("FCFS")&&!alg.equals("SJF")&&!alg.equals("SRT")&&!alg.equals("Priority")&&!alg.equals("RRf")&&!alg.equals("RRv"))
 		{
 			System.out.println("What algorithm to use?(FCFS, SJF, SRT, Priority, RRf, RRv)");
@@ -108,6 +115,87 @@ public class Scheduler
 				break;
 		}
 		System.out.println("Average wait time: " + output[0] + " Average turnaround time: " + output[1]);
+*/	
+		
+//NEW
+ 		double tatlist[] = new double[5];			
+		double tatcompare[] = new double[5];
+		
+		while(true&& !alg.equals("done"))
+		{
+
+			System.out.println("\nWhat algorithm to use?(FCFS, SJF, SRT, Priority, RRf, RRv)");
+			alg = reader.nextLine();
+		
+			double output[] = new double[2];
+			
+			switch(alg)
+			{
+				case "FCFS":
+					output = FCFS(processes);
+					break;
+				case "SJF":
+					output = SJF(processes);
+					break;
+				case "SRT":
+					output = SRT(processes);
+					break;
+				case "Priority":
+					output = Priority(processes);
+					break;
+				case "RRf":
+					output = RRf(processes);
+					break;
+				case "RRv":
+					output = RRv(processes);
+					break;
+			}
+			
+			//TRYING TO MODIFY TO KEEP TRACK OF PAST TAT's IN ORDER TO DECIDE WHICH ALGORITHM IS BEST---THIS PART DOES NOT WORK YET (FROM HERE TO END OF MAIN)
+			double wt= output[0];
+			double tat= output[1];
+			
+			if(!alg.equals("done"))
+			{
+				System.out.println("Average wait time: " + wt + " Average turnaround time: " + tat+"\n");
+			}
+
+			int i = 0;	
+			tatlist[i]= tat;
+			tatcompare[i]= tat;
+			i++;
+			
+			//TESTING
+			//System.out.println(tatlist[i]);
+			//System.out.println(tatcompare[i]);
+		}
+		
+		if(alg.equals("done"))
+		{	
+			Arrays.sort(tatcompare);
+
+			double bestTAT= tatcompare[0];
+			
+			//TESTING
+			//System.out.println(bestTAT);
+					
+			int index=0;
+			
+			for(int j= 0; j< tatcompare.length; j++)
+			{
+				if(bestTAT == tatlist[j])
+				{
+					index=j;
+					break;
+				}
+			}
+			index= index+1;
+			
+			//TESTING
+			//System.out.println(index);
+			
+			System.out.println("\n\nAlgorithm " + index + " is the most efficient");
+		}
 	}
 	
 	private static double[] FCFS(Process[] process)
@@ -270,13 +358,10 @@ public class Scheduler
 			scounter++;
 		}
 		
-		//scenario where arrival time is the same, so processes get sorted by priority
-		if(scounter == 0)
+		if(scounter== 1)
 		{
-			int count = 0;
-			//arrival time searched
-			int scount = 0;
-			
+			int count=0;
+			int scount=0;
 			while (count<process.length)
 			{
 				for(int i=0;i<process.length;i++)
@@ -289,21 +374,28 @@ public class Scheduler
 				}
 				scount++;
 			}
-	
-			for(int i= 0; i< process.length; i++)
-			{	
-				results[0]+= results[1];
-				results[1]+= reorgProcess[i].getBursttime();
+			
+			int ct = 0;
+			for(int i=0;i<reorgProcess.length;i++)
+			{
+				if(ct<=reorgProcess[i].getArrivaltime())
+				{
+					ct=reorgProcess[i].getArrivaltime()+reorgProcess[i].getBursttime();
+					reorgProcess[i].setTurnaroundtime(ct-reorgProcess[i].getArrivaltime());
+					reorgProcess[i].setWaittime(reorgProcess[i].getTurnaroundtime()-reorgProcess[i].getBursttime());
+				}
+				else
+				{
+					ct=ct+reorgProcess[i].getBursttime();
+					reorgProcess[i].setTurnaroundtime(ct-reorgProcess[i].getArrivaltime());
+					reorgProcess[i].setWaittime(reorgProcess[i].getTurnaroundtime()-reorgProcess[i].getBursttime());
+				}
 			}
-		}
-		//scenario where arrival times are different
-		else
-		{
-			//while()
-			for(int i= 0; i< process.length; i++)
-			{	
-				results[0]+= results[1];
-				results[1]+= reorgProcess[i].getBursttime();
+			
+			for(int i=0;i<reorgProcess.length;i++)
+			{
+				results[0]+=reorgProcess[i].getWaittime();
+				results[1]+=reorgProcess[i].getTurnaroundtime();
 			}
 		}
 		
