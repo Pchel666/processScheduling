@@ -2,6 +2,7 @@ package process.scheduling;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Scheduler 
@@ -118,26 +119,26 @@ public class Scheduler
 */	
 		
 //NEW
- 		double tatlist[] = new double[6];			
-		double tatcompare[] = new double[6];
-		String algorithm[]= new String[6];
+		ArrayList<Double> tatlist = new ArrayList<Double>(0);
+		ArrayList<Double> tatcompare = new ArrayList<Double>(0);
+		ArrayList<String> algorithm = new ArrayList<String>(0);
 		
 		int i = 0;
 		int num= 1;
 		
-		while(true&& !alg.equals("done"))
+		while(!alg.equals("done"))
 		{
-			System.out.println("\nAlgorithm " + num + "?(FCFS, SJF, SRT, Priority, RRf, RRv)");				
+			System.out.println("\nAlgorithm " + num + "?(FCFS, SJF, SRT, Priority, RRf, RRv, done if done)");				
 			alg = reader.nextLine();
-
-			algorithm[i]= alg;
 		
 			double output[] = new double[2];
 			
 			switch(alg)
 			{
 				case "FCFS":
-					output = FCFS(processes);FCFSGnatt(processes)
+					output = FCFS(processes);
+					FCFSGnatt(processes);
+					System.out.println("");
 					break;
 				case "SJF":
 					output = SJF(processes);
@@ -158,47 +159,44 @@ public class Scheduler
 					holder = reader.nextInt();
 					output = RRv(processes, holder);
 					break;
+				case "done":
+					break;
+				default:
+					break;
 			}
-			
-			double wt= output[0];
-			double tat= output[1];
-			
-				
-			tatlist[i]= tat;
-			tatcompare[i]= tat;
-			
 			
 			if(!alg.equals("done"))
 			{
+				double wt= output[0];
+				double tat= output[1];
+				
+				algorithm.add(alg);
+				tatlist.add(tat);
+				tatcompare.add(tat);
+				
 				System.out.println("Average wait time: " + wt + " Average turnaround time: " + tat+"\n");
+				i++;
+				num++;
 			}
-			
-			i++;
-			num++;
 		}
 		
 		if(alg.equals("done"))
 		{	
-			Arrays.sort(tatcompare);
-
-			double bestTAT= tatcompare[0];
-					
+			Collections.sort(tatcompare);
+			double bestTAT= tatcompare.get(0);
 			int index=0;
-			
-			for(int j= 0; j< tatcompare.length; j++)
+			for(int j= 0; j< tatcompare.size(); j++)
 			{
-				if(bestTAT == tatlist[j])
+				if(bestTAT == tatlist.get(j))
 				{
 					index=j;
 					break;
 				}
 			}
 			index= index+1;
-			
-			System.out.println("\n\nAlgorithm " + index + "(" + algorithm[index-1] +") is the most efficient");
+			System.out.println("\n\nAlgorithm " + index + "(" + algorithm.get(index-1) +") is the most efficient");
 		}
-		
-
+		reader.close();
 	}
 	
 	private static double[] FCFS(Process[] process)
@@ -262,21 +260,16 @@ public class Scheduler
 		{
 			times[i]= process[i].getTurnaroundtime();
 		}
-		
 		if(times[0] != 0)
 		{
 			System.out.print("0");
 		}
-
 		for(int j=0; j<times.length;j++)
 		{
 			int p= j+1;
 			System.out.print("  -P" + p +"-  ");
-			
-			System.out.print(times[j]);
-			
+			System.out.print(times[j]);	
 		}
-
 	}
 	
 	private static double[] SJF(Process[] process)
