@@ -431,20 +431,25 @@ public class Scheduler
 	private static double[] RRf(Process[] process, int quantum)
 	{
 		//round robin (fixed)
+		ArrayList<Process> remainingProcesses = new ArrayList<Process>(0);
+		for(int i=0;i<process.length;i++)
+		{
+			remainingProcesses.add(process[i]);
+		}
 		ArrayList<Process> currentlyProcessed = new ArrayList<Process>(0);
 		double[] results = {0,0}; //{wait time, turnaround time}
 		int currentTime = 0;
 		boolean alldone = false;
 		while(!alldone)
 		{
-			for(int i=0;i<process.length;i++)
+			for(int i=0;i<remainingProcesses.size();i++)
 			{
-				if (process[i].getArrivaltime()==currentTime)
+				while(remainingProcesses.get(i).getArrivaltime()<=currentTime)
 				{
-					currentlyProcessed.add(process[i]);
+					currentlyProcessed.add(remainingProcesses.remove(i));
 				}
 			}
-			currentTime++;
+			currentTime+=quantum;
 			alldone = true;
 		}
 		
