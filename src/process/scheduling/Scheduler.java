@@ -137,7 +137,7 @@ public class Scheduler
 			switch(alg)
 			{
 				case "FCFS":
-					output = FCFS(processes);
+					output = FCFS(processes);FCFSGnatt(processes)
 					break;
 				case "SJF":
 					output = SJF(processes);
@@ -256,16 +256,25 @@ public class Scheduler
 	{
 		FCFS(process);
 		
-		double times[]= new double[process.length];
+		int times[]= new int[process.length];
 		
 		for(int i=0; i<process.length; i++)
 		{
-			times[i]= process[i].getWaittime();
+			times[i]= process[i].getTurnaroundtime();
 		}
 		
+		if(times[0] != 0)
+		{
+			System.out.print("0");
+		}
+
 		for(int j=0; j<times.length;j++)
 		{
-			for(int k= 0; )
+			int p= j+1;
+			System.out.print("  -P" + p +"-  ");
+			
+			System.out.print(times[j]);
+			
 		}
 
 	}
