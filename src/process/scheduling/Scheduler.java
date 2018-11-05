@@ -431,25 +431,28 @@ public class Scheduler
 	private static double[] RRf(Process[] process, int quantum)
 	{
 		//round robin (fixed)
-		ArrayList<Process> remainingProcesses = new ArrayList<Process>(0);
+		ArrayList<Process> remainingProcesses = new ArrayList<Process>(0);//will keep processes that haven't arrived yet
 		for(int i=0;i<process.length;i++)
 		{
 			remainingProcesses.add(process[i]);
 		}
-		ArrayList<Process> currentlyProcessed = new ArrayList<Process>(0);
+		ArrayList<Process> currentlyProcessed = new ArrayList<Process>(0);//processes that are being processed
 		double[] results = {0,0}; //{wait time, turnaround time}
-		int currentTime = 0;
+		int currentTime = 0;//current time keeper, will tick by the quantum
 		boolean alldone = false;
 		while(!alldone)
 		{
-			for(int i=0;i<remainingProcesses.size();i++)
+			if(!remainingProcesses.isEmpty())//moves the arrived processes to the list of currently processed processes
 			{
-				while(remainingProcesses.get(i).getArrivaltime()<=currentTime)
+				for(int i=0;i<remainingProcesses.size();i++)
 				{
-					currentlyProcessed.add(remainingProcesses.remove(i));
+					while(remainingProcesses.get(i).getArrivaltime()<=currentTime)
+					{
+						currentlyProcessed.add(remainingProcesses.remove(i));
+					}
 				}
 			}
-			currentTime+=quantum;
+			currentTime+=quantum;//ticks the "timeline" by the quantum
 			alldone = true;
 		}
 		
