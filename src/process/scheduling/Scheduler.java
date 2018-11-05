@@ -118,14 +118,19 @@ public class Scheduler
 */	
 		
 //NEW
- 		double tatlist[] = new double[5];			
-		double tatcompare[] = new double[5];
+ 		double tatlist[] = new double[6];			
+		double tatcompare[] = new double[6];
+		String algorithm[]= new String[6];
+		
+		int i = 0;
+		int num= 1;
 		
 		while(true&& !alg.equals("done"))
 		{
-
-			System.out.println("\nWhat algorithm to use?(FCFS, SJF, SRT, Priority, RRf, RRv)");
+			System.out.println("\nAlgorithm " + num + "?(FCFS, SJF, SRT, Priority, RRf, RRv)");				
 			alg = reader.nextLine();
+
+			algorithm[i]= alg;
 		
 			double output[] = new double[2];
 			
@@ -151,23 +156,21 @@ public class Scheduler
 					break;
 			}
 			
-			//TRYING TO MODIFY TO KEEP TRACK OF PAST TAT's IN ORDER TO DECIDE WHICH ALGORITHM IS BEST---THIS PART DOES NOT WORK YET (FROM HERE TO END OF MAIN)
 			double wt= output[0];
 			double tat= output[1];
+			
+				
+			tatlist[i]= tat;
+			tatcompare[i]= tat;
+			
 			
 			if(!alg.equals("done"))
 			{
 				System.out.println("Average wait time: " + wt + " Average turnaround time: " + tat+"\n");
 			}
-
-			int i = 0;	
-			tatlist[i]= tat;
-			tatcompare[i]= tat;
-			i++;
 			
-			//TESTING
-			//System.out.println(tatlist[i]);
-			//System.out.println(tatcompare[i]);
+			i++;
+			num++;
 		}
 		
 		if(alg.equals("done"))
@@ -175,9 +178,6 @@ public class Scheduler
 			Arrays.sort(tatcompare);
 
 			double bestTAT= tatcompare[0];
-			
-			//TESTING
-			//System.out.println(bestTAT);
 					
 			int index=0;
 			
@@ -191,11 +191,10 @@ public class Scheduler
 			}
 			index= index+1;
 			
-			//TESTING
-			//System.out.println(index);
-			
-			System.out.println("\n\nAlgorithm " + index + " is the most efficient");
+			System.out.println("\n\nAlgorithm " + index + "(" + algorithm[index-1] +") is the most efficient");
 		}
+		
+
 	}
 	
 	private static double[] FCFS(Process[] process)
