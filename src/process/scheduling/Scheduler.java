@@ -142,6 +142,8 @@ public class Scheduler
 					break;
 				case "SJF":
 					output = SJF(processes);
+					SJFGnatt(processes);
+					System.out.println("");
 					break;
 				case "SRT":
 					output = SRT(processes);
@@ -340,6 +342,28 @@ public class Scheduler
 		//turn around time average
 		results[1]= results[1]/process.length;
 		return results;
+	}
+	
+	private static void SJFGnatt(Process[] process)
+	{
+		SJF(process);
+		
+		int times[]= new int[process.length];
+		
+		for(int i=0; i<process.length; i++)
+		{
+			times[i]= process[i].getTurnaroundtime();
+		}
+		if(times[0] != 0)
+		{
+			System.out.print("0");
+		}
+		for(int j=0; j<times.length;j++)
+		{
+			int p= j+1;
+			System.out.print("  -P" + p +"-  ");
+			System.out.print(times[j]);	
+		}
 	}
 	
 	private static double[] SRT(Process[] process)
